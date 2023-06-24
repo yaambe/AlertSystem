@@ -1,0 +1,65 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "PCContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "AlertSystem",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[pc].[Alert]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[pc].[AlertAssign]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[pc].[AlertCheck]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[pc].[AlertLevel]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[pc].[AlertPassengerPicture]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[pc].[AlertStatus]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[pc].[Nationality]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "mcs-mssql-02.PC.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
