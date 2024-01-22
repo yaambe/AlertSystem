@@ -7,8 +7,14 @@ namespace AlertSystem.Models
 {
     public partial class AlertStatus
     {
+        public AlertStatus()
+        {
+            Alert = new HashSet<Alert>();
+            AlertAssign = new HashSet<AlertAssign>();
+        }
+
         public int Id { get; set; }
-        public long StatusName { get; set; }
+        public string StatusName { get; set; }
         public DateTime? ValidFrom { get; set; }
         public DateTime? ValidTo { get; set; }
         public int CreatedBy { get; set; }
@@ -16,5 +22,8 @@ namespace AlertSystem.Models
         public int? LastUpdateBy { get; set; }
         public DateTime? LastUpdatedDate { get; set; }
         public bool RecordStatus { get; set; }
+
+        public virtual ICollection<Alert> Alert { get; set; }
+        public virtual ICollection<AlertAssign> AlertAssign { get; set; }
     }
 }

@@ -39,6 +39,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[pc].[Flight]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[pc].[Nationality]",
          "ObjectType": 0
       }

@@ -6,11 +6,14 @@ namespace AlertSystem.Controllers
 {
     public class HomeController : Controller
     {
+        private PCContext pc;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, PCContext pcdb)
         {
             _logger = logger;
+            pc = pcdb;
         }
 
         public IActionResult Index()
@@ -18,10 +21,6 @@ namespace AlertSystem.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

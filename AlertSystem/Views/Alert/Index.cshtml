@@ -1,0 +1,274 @@
+﻿@model Alert
+@{
+    var thatList = ViewBag.viewlist as List<Alert>;
+}
+<!--Modals-->
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <u><b><span id="deleteItemName"></span></b></u>'s record?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="#" class="btn btn-danger" id="deleteButton">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- My modal that will appear when the view button is pressed -->
+<!-- The Modal -->
+<div class="modal fade" id="ViewModal" tabindex="-1" aria-labelledby="ViewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Alert Details</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="modalContent"></div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- End of all Modals -->
+
+
+
+<div class="card">
+    <div class="card-header text-center">
+        <h3>Add Alert</h3>
+    </div>
+
+    <div class="card-body">
+        <form id="CreateAlert" method="post" action="~/Alert/SaveAlert">
+            <div class="row">
+                <input id="AlertId" type="hidden" name="Id" value="@(Model != null ? Model.Id : "0")" />
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="PassengerName">Passenger Name</label>
+                            <input type="text" class="form-control" name="PassengerName" placeholder="Passenger Name" maxlength="100" required value="@(Model != null ? Model.PassengerName : "")" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="PassportNo">Passport No</label>
+                            <input type="text" class="form-control" name="PassportNo" placeholder="Passport Number" maxlength="15" required value="@(Model != null ? Model.PassportNo : "")" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Nid">National ID</label>
+                            <input type="text" class="form-control" name="Nid" maxlength="15" placeholder="National ID" required value="@(Model != null ? Model.Nid : "")" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="DateOfBirth">Date Of Birth</label>
+                            <input type="date" class="form-control" name="DateOfBirth" required value="@(Model != null ? Model.DateOfBirth.ToString("yyyy-MM-dd") : "")" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Gender">Gender</label>
+                            <select class="form-select" name="Gender" required>
+                                <option value="@(Model != null ? Model.Gender : "")">@(Model != null ? Model.Gender : "-- Gender --")</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Nationality">Nationality</label>
+                            <select class="form-select" name="NationalityId" required>
+                                <option value="@(Model != null ? Model.NationalityId : "")">@(Model != null ? Model.NationalityId : "-- Nationality --")</option>
+                                <option value="1">Maldivian</option>
+                                <option value="2">American</option>
+                                <option value="etc">Will generate values of the table</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="FlightNo">Flight</label>
+                            <select class="form-select" name="FlightId" required>
+                                <option value="@(Model != null ? Model.FlightId : "")">@(Model != null ? Model.FlightId : "-- FlightNo --")</option>
+                                <option value="1">EK6520</option>
+                                <option value="2">Q5698</option>
+                                <option value="etc">Will generate values of the table for flights</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="FlightScheduledDate">Flight Scheduled Date</label>
+                            <input type="date" class="form-control" name="FlightScheduledDate" required value="@(Model != null ? Model.FlightScheduledDate.ToString("yyyy-MM-dd") : "")" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="IsLuggageHit">Luggage Hit?</label>
+                            <select class="form-select" name="IsLuggageHit" required>
+                                <option value="@(Model != null ? (Model.IsLuggageHit ? "YES" : "NO") : "")">@(Model != null ? (Model.IsLuggageHit ? "YES" : "NO") : "-- Is Luggage Hit? --")</option>
+                                <option value="YES">YES</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="LuggagetagNumber">Luggage tag Number</label>
+                            <input type="text" class="form-control" placeholder="Luggage Tag" name="LuggagetagNumber" maxlength="10" required value="@(Model != null ? Model.LuggagetagNumber : "")" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="IsTroute">Is Troute?</label>
+                            <select class="form-select" name="IsTroute" required>
+                                <option value="@(Model != null ? (Model.IsTroute ? "YES" : "NO") : "")">@(Model != null ? (Model.IsTroute ? "YES" : "NO") : "-- Is Troute? --")</option>
+                                <option value="YES">YES</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="TravellingAlone">Travelling Alone?</label>
+                            <select class="form-select" name="TravellingAlone" required>
+                                <option value="@(Model != null ? (Model.TravellingAlone.HasValue ? "YES" : "NO") : null)">@(Model != null ? (Model.TravellingAlone.HasValue ? "YES" : "NO") : "-- Is Travelling Alone? --")</option>
+                                <option value=@true>YES</option>
+                                <option value=@false>NO</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Eta">Estimated Time of Arrival</label>
+                            <input type="datetime-local" class="form-control" name="Eta" required value="@(Model != null && Model.Eta.HasValue ? Model.Eta.Value.ToString("yyyy-MM-dd HH:mm") : "")" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-center p-3">
+                            <img src="https://endlessicons.com/wp-content/uploads/2012/12/add-icon-614x460.png" alt="PassengerPhoto" width="450">
+                        </div>
+
+                        <div class="col-md-12 d-flex justify-content-center gap-2">
+                            <button id="AddNewRecord" class="btn btn-light btn-outline-dark" type="button" onclick="Reset()">Reset</button>
+                            <button class="btn btn-dark" type="submit">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<br>
+
+<div class="row">
+    <h3 style="text-align:center;">Recent Alerts</h3>
+</div>
+<hr>
+
+@if (thatList != null)
+{
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <td class="text-center">Passenger Name</td>
+                <td class="text-center">Passport No</td>
+                <td class="text-center">D.O.B</td>
+                <td class="text-center">Gender</td>
+                <td class="text-center">Nationality</td>
+                <td class="text-center">Flight No</td>
+                <td class="text-center">Scheduled Date</td>
+                <td class="text-center">Luggage Hit?</td>
+                <td class="text-center">Actions</td>
+            </tr>
+        </thead>
+        @foreach (var x in thatList)
+        {
+            <tr>
+                <td class="text-center">@x.PassengerName</td>
+                <td class="text-center">@x.PassportNo</td>
+                <td class="text-center">@x.DateOfBirth.ToString("dd-MMM-yyyy")</td>
+                <td class="text-center">@x.Gender</td>
+                <td class="text-center">@x.NationalityId</td>
+                <td class="text-center">@x.FlightId</td>
+                <td class="text-center">@x.FlightScheduledDate.ToString("dd-MMM-yyyy")</td>
+                <td class="text-center">@x.IsLuggageHit</td>
+                <td class="text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<a id="ViewButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewModal" data-record-id="@x.Id">View</a>*@
+                            <button type="button" class="btn btn-dark" onclick="viewRecord(@x.Id)">View</button>
+                            <a href="~/Alert/AlertEdit?AlertId=@x.Id" class="btn btn-light btn-outline-dark">Edit</a>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal" data-alertid="@x.Id" data-alertname="@x.PassengerName">Delete</button>
+                            <a href="~/Alert/ViewPicture?AlertId=@x.Id" class="btn btn-dark">Face</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+}
+<hr>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+            $('#deleteConfirmationModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var alertId = button.data('alertid');
+                var alertName = button.data('alertname');
+                $('#deleteItemName').text(alertName);
+                var deleteUrl = '/Alert/AlertDelete?AlertId=' + alertId;
+                $('#deleteButton').attr('href', deleteUrl);
+            });
+        });
+
+
+        function viewRecord(alertId) {
+            $.ajax({
+                url: '@Url.Action("ModalView", "Alert")',
+                data: { alertId: alertId },
+                type: 'GET',
+                success: function(result) {
+                    $('#modalContent').html(result);
+                    $('#ViewModal').modal('show');
+                },
+                error: function() {
+                    alert('An error occurred while loading the modal.');
+                }
+            });
+        }
+
+        function Reset() {
+            var form = $('#CreateAlert');
+            var inputs = form.find('.form-control');
+            $('#AlertId').val('0');
+
+            inputs.each(function() {
+                console.log($(this).val(''));
+            });
+
+            $('[name="Gender"]').val('');
+            $('[name="NationalityId"]').val('');
+            $('[name="FlightId"]').val('');
+            $('[name="IsLuggageHit"]').val('');
+            $('[name="IsTroute"]').val('');
+            $('[name="TravellingAlone"]').val('');
+        }
+
+        datepicker.addEventListener('change', function() {
+            const selectedDate = this.value;
+
+            // Format the selected date using moment.js
+            const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
+
+            // Update the value of the input field with the formatted date
+            this.value = formattedDate;
+        });
+
+    </script>
+
+}

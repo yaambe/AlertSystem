@@ -5,17 +5,24 @@ using System.Collections.Generic;
 
 namespace AlertSystem.Models
 {
-    public partial class AlertPassengerPicture
+    public partial class Flight
     {
+        public Flight()
+        {
+            Alert = new HashSet<Alert>();
+        }
+
         public int Id { get; set; }
-        public int AlertId { get; set; }
-        public byte[] PassengerPhoto { get; set; }
+        public string FlightNo { get; set; }
+        public string Aircraft { get; set; }
+        public DateTime ValidFrom { get; set; }
+        public DateTime? ValidTo { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
-        public int? LastUpdatedBy { get; set; }
+        public int? LastUpdateBy { get; set; }
         public DateTime? LastUpdatedDate { get; set; }
         public bool RecordStatus { get; set; }
 
-        public virtual Alert Alert { get; set; }
+        public virtual ICollection<Alert> Alert { get; set; }
     }
 }

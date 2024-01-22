@@ -18,7 +18,7 @@ namespace AlertSystem.Models
         public DateTime AssignedDate { get; set; }
         public int AssignedBy { get; set; }
         public DateTime StaffNotified { get; set; }
-        public string AlertStatus { get; set; }
+        public int AlertStatusId { get; set; }
         public int Createdby { get; set; }
         public DateTime CreatedDate { get; set; }
         public int? LastUpdatedBy { get; set; }
@@ -26,6 +26,7 @@ namespace AlertSystem.Models
         public bool RecordStatus { get; set; }
 
         public virtual Alert Alert { get; set; }
+        public virtual AlertStatus AlertStatus { get; set; }
         public virtual ICollection<AlertCheck> AlertCheck { get; set; }
     }
 }

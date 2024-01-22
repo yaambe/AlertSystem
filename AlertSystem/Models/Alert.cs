@@ -10,6 +10,7 @@ namespace AlertSystem.Models
         public Alert()
         {
             AlertAssign = new HashSet<AlertAssign>();
+            AlertPassengerPicture = new HashSet<AlertPassengerPicture>();
         }
 
         public int Id { get; set; }
@@ -18,12 +19,12 @@ namespace AlertSystem.Models
         public byte[] PassengerPhoto { get; set; }
         public bool? TravellingAlone { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public string Status { get; set; }
+        public int AlertStatusId { get; set; }
         public int AlertLevelId { get; set; }
         public string Nid { get; set; }
         public string Gender { get; set; }
         public int NationalityId { get; set; }
-        public string FlightNo { get; set; }
+        public int FlightId { get; set; }
         public DateTime FlightScheduledDate { get; set; }
         public DateTime? Eta { get; set; }
         public bool IsLuggageHit { get; set; }
@@ -35,6 +36,11 @@ namespace AlertSystem.Models
         public DateTime? LastUpdatedDate { get; set; }
         public bool RecordStatus { get; set; }
 
+        public virtual AlertLevel AlertLevel { get; set; }
+        public virtual AlertStatus AlertStatus { get; set; }
+        public virtual Flight Flight { get; set; }
+        public virtual Nationality Nationality { get; set; }
         public virtual ICollection<AlertAssign> AlertAssign { get; set; }
+        public virtual ICollection<AlertPassengerPicture> AlertPassengerPicture { get; set; }
     }
 }

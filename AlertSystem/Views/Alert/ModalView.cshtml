@@ -1,0 +1,61 @@
+﻿@model Alert
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <tr>
+                    <td><b>Passenger Name</b></td>
+                    <td id="PassengerName" name="PassengerName">@(Model != null ? Model.PassengerName : "")</td>
+                </tr>
+                <tr>
+                    <td><b>Passport No</b></td>
+                    <td id="PassportNo">@(Model != null ? Model.PassportNo : "")</td>
+                </tr>
+                <tr>
+                    <td><b>National ID</b></td>
+                    <td id="NID">@(Model != null ? Model.Nid : "")</td>
+                </tr>
+                <tr>
+                    <td><b>Date Of Birth</b></td>
+                    <td id="DOB">@(Model != null ? Model.DateOfBirth.ToString("yyyy-MM-dd") : "")</td>
+                </tr>
+                <tr>
+                    <td><b>Gender</b></td>
+                    <td>@(Model != null ? Model.Gender : "-- Gender --")</td>
+                </tr>
+                <tr>
+                    <td><b>Nationality</b></td>
+                    <td>@(Model != null ? Model.NationalityId : "-- Not Set --")</td>
+                </tr>
+                <tr>
+                    <td><b>Flight</b></td>
+                    <td>@(Model != null ? Model.FlightId : "-- Not Set --")</td>
+                </tr>
+                <tr>
+                    <td><b>Flight Scheduled Date</b></td>
+                    <td>@(Model != null ? Model.FlightScheduledDate.ToString("yyyy-MM-dd") : "")</td>
+                </tr>
+                <tr>
+                    <td><b>Luggage Hit?</b></td>
+                    <td>@(Model != null ? (Model.IsLuggageHit ? "YES" : "NO") : "-- Not set --")</td>
+                </tr>
+                <tr>
+                    <td><b>Luggage tag Number</b></td>
+                    <td>@(Model != null ? Model.LuggagetagNumber : "--Not Set--")</td>
+                </tr>
+                <tr>
+                    <td><b>Is Troute?</b></td>
+                    <td>@(Model != null ? (Model.IsTroute ? "YES" : "NO") : "-- Not Set --")</td>
+                </tr>
+                <tr>
+                    <td><b>Estimated Time of Arrival</b></td>
+                    <td>@(Model != null && Model.Eta.HasValue ? Model.Eta.Value.ToString("yyyy-MM-dd HH:mm") : "-- Not Set --")</td>
+                </tr>
+                <tr>
+                    <td><b>Travelling Alone?</b></td>
+                    <td>@(Model != null ? (Model.TravellingAlone.HasValue ? "YES" : "NO") : "-- Is Travelling Alone? --")</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

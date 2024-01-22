@@ -7,6 +7,11 @@ namespace AlertSystem.Models
 {
     public partial class Nationality
     {
+        public Nationality()
+        {
+            Alert = new HashSet<Alert>();
+        }
+
         public int Id { get; set; }
         public string Nationality1 { get; set; }
         public string Country { get; set; }
@@ -16,5 +21,7 @@ namespace AlertSystem.Models
         public int? LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDate { get; set; }
         public bool RecordStatus { get; set; }
+
+        public virtual ICollection<Alert> Alert { get; set; }
     }
 }

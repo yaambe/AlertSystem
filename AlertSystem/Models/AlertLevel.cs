@@ -7,6 +7,11 @@ namespace AlertSystem.Models
 {
     public partial class AlertLevel
     {
+        public AlertLevel()
+        {
+            Alert = new HashSet<Alert>();
+        }
+
         public int Id { get; set; }
         public string LevelName { get; set; }
         public DateTime? ValidFrom { get; set; }
@@ -17,5 +22,7 @@ namespace AlertSystem.Models
         public int? LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedDate { get; set; }
         public bool RecordStatus { get; set; }
+
+        public virtual ICollection<Alert> Alert { get; set; }
     }
 }
